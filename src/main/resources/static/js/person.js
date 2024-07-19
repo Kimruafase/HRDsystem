@@ -12,7 +12,7 @@ function personInput(){
                         직급 : <input id ="positionInput1" type="text"/> <br/>
 
                         <button onclick ="personPost()" type ="button"> 인사 등록 </button>
-                        <button onclick ="postClear()" type="button"> 지우기 </button>
+                        <button onclick ="postClear1()" type="button"> 지우기 </button>
                     </form>
                     </div>`;
     personInput.innerHTML = html;
@@ -40,7 +40,7 @@ function personPost(){
     })
 }
 
-function postClear(){
+function postClear1(){
     let personInput = document.querySelector("#personPost");    
     personInput.innerHTML = `<div id = "personPost">
                             <a onclick = "personInput()">
@@ -59,7 +59,7 @@ function personGetInput(){
                         
 
                         <button onclick ="personGet()" type ="button"> 인사 출력 </button>
-                        <button onclick ="getClear()" type="button"> 지우기 </button>
+                        <button onclick ="getClear1()" type="button"> 지우기 </button>
                     </form>
                     </div>`;
     personInput.innerHTML = html;
@@ -94,7 +94,7 @@ function personGet(){
 
 }
 
-function getClear(){
+function getClear1(){
     let personInput = document.querySelector("#personGet");    
     personInput.innerHTML = `<div id = "personGet">
                             <a onclick = "personGetInput()">
@@ -115,7 +115,7 @@ function personUpdateInput(){
                         수정할 직급 : <input id ="positionInput2" type="text"/> <br/>
                     
                         <button onclick ="personUpdate()" type ="button"> 인사 수정 </button>
-                        <button onclick ="updateClear()" type="button"> 지우기 </button>
+                        <button onclick ="updateClear1()" type="button"> 지우기 </button>
                     </form>
                     </div>`;
                     personInput.innerHTML = html;
@@ -143,7 +143,7 @@ function personUpdate(){
     })
 }
 
-function updateClear(){
+function updateClear1(){
     let personInput = document.querySelector("#personUpdate");
     personInput.innerHTML = `<div id = "personUpdate">
                             <a onclick = "personUpdateInput()">
@@ -161,7 +161,7 @@ function personDeleteInput(){
                         삭제할 인사 번호 : <input id ="personInput4" type="text"/> <br/>
                     
                         <button onclick ="personDelete()" type ="button"> 인사 삭제 </button>
-                        <button onclick ="deleteClear()" type="button"> 지우기 </button>
+                        <button onclick ="deleteClear1()" type="button"> 지우기 </button>
                     </form>
                     </div>`;
                     personInput.innerHTML = html;
@@ -186,7 +186,7 @@ function personDelete(){
     })
 }
 
-function deleteClear(){
+function deleteClear1(){
     let personInput = document.querySelector("#personDelete");
     personInput.innerHTML = `<div id = "personDelete">
                             <a onclick = "personDeleteInput()">
