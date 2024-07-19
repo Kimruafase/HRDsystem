@@ -1,38 +1,39 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    //  SPRING BOOT WEB 라이브러리
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    //  MySQL 라이브러리
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
-    //  .jsp 파일 매핑 라이브러리
-//    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
-
-    // 타임리프 템플릿 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-
-    //  lombok 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
