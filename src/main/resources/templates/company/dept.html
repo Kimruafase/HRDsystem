@@ -5,6 +5,32 @@
     <title>Title</title>
 </head>
 <body>
+    <div th:replace = "~{/header.html :: header}">
+
+    </div>
+    부서 관리 페이지
+    <div id = "deptPost">
+        <a onclick = "deptInput()">
+            부서 등록
+        </a>
+    </div>
+    <br/>
+    <div id = "deptGet">
+        <a onclick = "deptGet()">
+            부서 전체 출력
+        </a>
+    </div>
+    <div id = "deptUpdate">
+        <a onclick = "deptUpdateInput()">
+            부서 수정
+        </a>
+    </div>
+    <br/>
+    <div id = "deptDelete">
+        <a onclick = "deptDeleteInput()">
+            부서 삭제
+        </a>
+    </div>
 
 </body>
 </html>

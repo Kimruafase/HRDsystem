@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
+<div th:fragment = "header">
+    <ul>
+        <li>
+            <a href="/">
+                홈
+            </a>
+        </li>
+        <li>
+            <a href="/company/dept">
+                부서 관리
+            </a>
+        </li>
+        <li>
+            <a href="/company/person">
+                인사 관리
+            </a>
+    </ul>
+
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/dept.js"></script>
+    <script src="/js/person.js"></script>
+</div>
 
 </body>
 </html>
