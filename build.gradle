@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //  SPRING BOOT WEB 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //  MySQL 라이브러리
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    //  .jsp 파일 매핑 라이브러리
+//    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+
+    // 타임리프 템플릿 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    //  lombok 라이브러리
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
