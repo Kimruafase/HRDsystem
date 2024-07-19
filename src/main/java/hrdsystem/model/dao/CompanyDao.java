@@ -1,12 +1,14 @@
 package hrdsystem.model.dao;
 
 import hrdsystem.model.dto.DeptDto;
+import hrdsystem.model.dto.PersonDto;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 @Component
 public class CompanyDao {
@@ -43,6 +45,43 @@ public class CompanyDao {
         }
         return false;
     }
+    //  2. 부서 출력
+    public ArrayList<DeptDto> deptPrint(){
+        ArrayList<DeptDto> list=new ArrayList<>();
+        try {
+            String sql="select * from dept;";
+            ps=conn.prepareStatement(sql);
+            rs= ps.executeQuery();
+            while (rs.next()){
+                DeptDto deptDto= DeptDto.builder()
+                        .dno(rs.getInt(1))
+                        .dname(rs.getString(2))
+                        .dphone(rs.getString(3))
+                        .build();
+                list.add(deptDto);
+            }
+        }catch (Exception e){System.out.println(e);}
+        return list;
+    }
+
+    // 3. 부서 수정
+    public boolean deptPut(DeptDto deptDto){
+        try{
+            String sql = "update dept set dname = ?, dphone = ? where dno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,deptDto.getDname());
+            ps.setString(2,deptDto.getDphone());
+            ps.setInt(3,deptDto.getDno());
+
+            int count = ps.executeUpdate();
+            if(count == 1){
+                return true;
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
 
     //  4. 부서 삭제
     public boolean deptDelete(DeptDto deptDto){
@@ -56,6 +95,76 @@ public class CompanyDao {
                 return true;
             }
         }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 5. 인사 등록
+    public boolean personPost(PersonDto personDto) {
+        try {
+            String sql = "insert into person(dno, name, phone, position) values(?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, personDto.getDno());
+            ps.setString(2, personDto.getName());
+            ps.setString(3, personDto.getPhone());
+            ps.setString(4, personDto.getPosition());
+
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 6. 인사 출력
+    public ArrayList<PersonDto> personGet(int dNo) {
+        ArrayList<PersonDto> list = new ArrayList<>();
+        try {
+            String sql = "select * from person where dno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, dNo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                PersonDto personDto = PersonDto.builder()
+                        .pno(rs.getInt("pno"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .position(rs.getString("position"))
+                        .dno(rs.getInt("dno"))
+                        .build();
+                list.add(personDto);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    // 7. 인사 수정
+    public boolean personPut(PersonDto personDto) {
+        try {
+            String sql = "update person set name = ?, phone = ?, position = ? where pno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, personDto.getName());
+            ps.setString(2, personDto.getPhone());
+            ps.setString(3, personDto.getPosition());
+            ps.setInt(4, personDto.getPno());
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 8. 인사 삭제
+    public boolean personDelete(int pNo) {
+        try {
+            String sql = "delete from person where pno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, pNo);
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
             System.out.println(e);
         }
         return false;
